@@ -4,17 +4,8 @@
 
 @layer components {
 
-    .form-group{
-      @apply flex flex-col lg:flex-row justify-between font-normal 
-      text-base items-center gap-2;
-    }
-    .input-element{
-      @apply flex flex-row lg:w-3/5 w-full h-10 box-border rounded-sm border border-zinc-400 bg-none items-center px-1 focus:outline-blue-500;
-    }
-    .label-format{
-      @apply tracking-wider self-start lg:pl-1;
-    }
-    .sidebar-item{
-      @apply flex flex-row gap-4 items-center p-1 grayscale hover:grayscale-0 hover:text-blue-600 text-neutral-800 focus:grayscale-0 focus:text-blue-500;
+    .btn-primary {
+      @apply flex flex-row bg-periwinkle w-full justify-center rounded-full py-1.5 px-2.5  text-night font-medium text-lg;
     }
   }
+
