@@ -9,56 +9,75 @@ export default function Login(){
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
 
+    const changePasswordVisibility = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => (
+        setShowPassword(!showPassword)
+    )
+
     return(
-        <div className="flex flex-col w-1/2 bg-night rounded p-6 justify-between
-        text-ivory items-center gap-5">
+        <div className="flex flex-col bg-night rounded px-6 py-10 justify-between
+        text-ivory items-center w-5/6 md:w-4/5 gap-5">
 
             <section className="flex flex-col items-center justify-between gap-3 
-            border-black-olive border-b pb-3">
-                <img src={mymusic_icon} className="w-1/6"/>
-                <h1 className="font-medium text-4xl text-light-periwinkle tracking-wide">
-                    Log in  My Music
+            border-black-olive border-b pb-5 w-full">
+                <img src={mymusic_icon} className="w-1/5"/>
+                <h1 className="font-medium flex flex-col gap-1
+                text-center text-4xl text-light-periwinkle tracking-wide">
+                    Log in 
+                    <span>
+                        My Music
+                    </span>
                 </h1>
             </section>
 
-            <form className="flex flex-col justify-between gap-4 w-4/5">
+            <form className="flex flex-col justify-between gap-8 ">
 
-                <section className="flex flex-col w-full justify-between gap-2">
+                <section className="flex flex-col w-full justify-between gap-3 group">
                     <label htmlFor="email" className="text-xl font-medium">
                         Email
                     </label>
-                    <input id="email" type="text" placeholder="Email"
-                    className="flex flex-row h-10 box-border bg-night rounded-sm border border-ivory 
-                    items-center px-1 focus:outline-periwinkle" 
-                    />
+                    <div className="flex flex-row justify-between 
+                    group-focus-within:border-periwinkle
+                    items-center rounded-lg border border-dim-gray
+                    ">
+                        <input id="email" type="text" required
+                        className="block px-2.5 pb-2.5 pt-4 w-full bg-night
+                        text-ivory aparence-none rounded-lg
+                        focus:outline-none focus:ring-0 autofill:bg-night"
+                        />
+                    </div>
                 </section>
 
-                <section className="flex flex-col w-full justify-between gap-2 "> 
+                <section className="flex flex-col w-full justify-between gap-3 group"> 
                     <label htmlFor="password" className="text-xl font-medium">
                         Password
                     </label>
                 
-                    <div className="flex flex-row justify-between h-10
-                    items-center rounded-sm border border-ivory">
+                    <div className="flex flex-row justify-between 
+                    group-focus-within:border-periwinkle
+                    items-center rounded-lg border border-dim-gray
+                    ">
                         <input 
                             id="password" 
-                            placeholder="Password"
+                            required
                             type={showPassword ? "text" : "password"}
                             value={password}
                             onChange={(e) =>
                                 setPassword(e.target.value)
                             }
-                            className="h-9 bg-night focus:outline-none px-1 w-full"
+                            className="block px-2.5 pb-2.5 pt-4 w-full bg-night
+                            text-ivory aparence-none rounded-lg
+                            focus:outline-none focus:ring-0
+                            autofill:bg-none"
                         />
 
                         {showPassword &&
-                            <button>
-                                <img src={open_eye} className="h-5 w-5"/>
+                            <button onClick={changePasswordVisibility}>
+                                <img src={open_eye} className="w-14 px-2"/>
                             </button>
                         }
                         {!showPassword &&
-                            <button>
-                                <img src={close_eye} className="h-5 w-5"/>
+                            <button onClick={changePasswordVisibility}>
+                                <img src={close_eye} className="w-14 px-2"/>
                             </button>
                         }
                     </div>
