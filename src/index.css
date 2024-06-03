@@ -5,7 +5,8 @@
 @layer components {
 
     .btn-primary {
-      @apply flex flex-row bg-periwinkle w-full justify-center rounded-full py-1.5 px-2.5  text-night font-medium text-lg;
+      @apply flex flex-row bg-periwinkle w-full justify-center rounded-full py-1.5 
+      px-2.5 text-night font-medium text-lg md:text-xl hover:bg-dark-periwinkle;
     }
   }
 

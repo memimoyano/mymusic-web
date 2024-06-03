@@ -15,11 +15,11 @@ export default function Login(){
 
     return(
         <div className="flex flex-col bg-night rounded px-6 py-10 justify-between
-        text-ivory items-center w-5/6 md:w-4/5 gap-5">
+        text-ivory items-center w-5/6 md:w-3/6 gap-5">
 
             <section className="flex flex-col items-center justify-between gap-3 
             border-black-olive border-b pb-5 w-full">
-                <img src={mymusic_icon} className="w-1/5"/>
+                <img src={mymusic_icon} className="w-1/5 md:w-1/6"/>
                 <h1 className="font-medium flex flex-col gap-1
                 text-center text-4xl text-light-periwinkle tracking-wide">
                     Log in 
@@ -29,7 +29,7 @@ export default function Login(){
                 </h1>
             </section>
 
-            <form className="flex flex-col justify-between gap-8 ">
+            <form className="flex flex-col justify-between gap-8 md:w-3/4">
 
                 <section className="flex flex-col w-full justify-between gap-3 group">
                     <label htmlFor="email" className="text-xl font-medium">
