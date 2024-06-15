@@ -22,3 +22,14 @@ export function getLastFiveSongs() {
         throw error;
     });
 }
+
+export function getSearchSongs(keyword: string) {
+    const headers = {
+        'Content-Type': 'application/json'
+    }
+    return axios.get(`${CONSTANTS.BASE_URL}/songs/search`, {headers: headers, withCredentials: true, params: { keyword }})
+    .then(res => res.data)
+    .catch(error => {
+        throw error;
+    });
+}

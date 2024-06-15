@@ -3,7 +3,7 @@ import home from '../images/home.webp'
 import { Song } from '../shared/interfaces/Song';
 import Searchbar from './helpers/Searchbar'
 import SongListItem from './helpers/SongListItem'
-import { getAllSongs } from '../shared/services/SongService';
+import { getAllSongs, getSearchSongs } from '../shared/services/SongService';
 
 export default function SongsPage(){
 
@@ -18,6 +18,13 @@ export default function SongsPage(){
             .then((responseSongs: Song[]) => {
                 setAllSongs(responseSongs);
             })
+    }
+
+    const submitSearchSong = (s: string) => {
+        getSearchSongs(s)
+        .then((responseSongs: Song[]) => {
+            setAllSongs(responseSongs);
+        })
     }
 
     const mapSongs = allSongs?.map((s) => (
@@ -50,11 +57,12 @@ export default function SongsPage(){
             </section>
 
             <div className='flex flex-row gap-2 px-6 w-full justify-end'>
-                <Searchbar/>
+                <Searchbar 
+                submit={submitSearchSong}
+                />
             </div>
 
-            <div className='flex flex-col w-full md:justify-start justify-center px-1 
-            overflow-y-scroll scrollb'>
+            <div className='flex flex-col w-full md:justify-start justify-center px-1 '>
 
                 {mapSongs}
 

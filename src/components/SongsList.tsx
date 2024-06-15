@@ -18,7 +18,7 @@ export default function SongsList(props: Props){
 
 
     return(
-        <section className='flex flex-col gap-2 w-full'>
+        <section className='flex flex-col gap-2 w-full' >
 
                 <div className='flex flex-row items-center justify-between w-full'>
                     <h1 className='text-xl font-medium'> 

@@ -1,17 +1,32 @@
-import { useState } from "react"
+import { FormEventHandler, useState } from "react"
 import close_eye from '../images/close-eye.webp';
 import open_eye from '../images/open-eye.webp';
 import mymusic_icon from '../images/mymusic-periwinkle-icon.webp'
+import { login } from "../shared/services/AuthService";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Login(){
-
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     const changePasswordVisibility = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => (
         setShowPassword(!showPassword)
     )
+
+    const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+        e.preventDefault();
+        try {
+            await login(email, password);
+            setError("");
+            navigate("/");
+        } catch(err) {
+            setError("Hubo un error al iniciar sesion. Compruebe sus credenciales");
+        }
+    }
 
     return(
         <div className="flex flex-col bg-night rounded px-6 py-10 justify-between
@@ -29,7 +44,7 @@ export default function Login(){
                 </h1>
             </section>
 
-            <form className="flex flex-col justify-between gap-8 md:w-3/4">
+            <form className="flex flex-col justify-between gap-8 md:w-3/4" onSubmit={onSubmit}>
 
                 <section className="flex flex-col w-full justify-between gap-3 group">
                     <label htmlFor="email" className="text-xl font-medium">
@@ -43,6 +58,7 @@ export default function Login(){
                         className="block px-2.5 pb-2.5 pt-4 w-full bg-night
                         text-ivory aparence-none rounded-lg
                         focus:outline-none focus:ring-0 autofill:bg-night"
+                        onChange={e => setEmail(e.target.value)}
                         />
                     </div>
                 </section>
@@ -83,7 +99,11 @@ export default function Login(){
                     </div>
 
                 </section>
-
+                
+                {error && 
+                    <div>{error}</div>
+                }
+   
                 <input type="submit" value={"Log in"} className="btn-primary"/>
             </form>
         </div>
