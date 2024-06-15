@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import Login from './components/Login'
 import MainPage from './components/MainPage'
-import PlaylistPage from './components/PlaylistPage'
 import PlaylistsPage from './components/PlaylistsPage'
 import SongsPage from './components/SongsPage'
 import MyPlaylistsPage from './components/MyPlaylistsPage'

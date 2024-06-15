@@ -1,9 +1,12 @@
-import { useState } from 'react'
-import { Playlist } from '../shared/interfaces/Playlist'
+import { useContext, useState } from 'react'
+import { Playlist, PlaylistRequest } from '../shared/interfaces/Playlist'
 import NewPlaylistButton from './helpers/NewPlaylistButton'
 import PlaylistBox from './helpers/PlaylistBox'
 import PopUp from './helpers/PopUp'
 import NewPlaylistForm from './helpers/NewPlaylistForm'
+import { createPlaylist } from '../shared/services/PlaylistService'
+import { AuthContext } from '../shared/helpers/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 interface Props{
     sectionName: string
@@ -14,18 +17,31 @@ interface Props{
 
 export default function PlaylistBar(props: Props){
 
+    const navigate = useNavigate();
     const [newPlaylistSelected, setNewPlaylistSelected] = useState(false);
+    const authEmail = useContext(AuthContext);
 
     const toggleNewPlaylistSelected = () => {
+        if (!authEmail) {
+            navigate("/login")
+        }
         setNewPlaylistSelected(!newPlaylistSelected);
     }
 
     const mapPlaylistsBoxs = props.playlistList && (props.playlistList).map((p,i) => (
         <PlaylistBox
+            key={p.id}
             playlist_name={p.name}
             song_count={p.songCount}
         />
     ))
+
+  
+    function submitNewPlaylist(playlist: PlaylistRequest) {
+        createPlaylist(playlist)
+        toggleNewPlaylistSelected();
+        window.location.reload();
+    }
 
     return(
         <section className='flex flex-col gap-2 w-full '>
@@ -36,7 +52,7 @@ export default function PlaylistBar(props: Props){
         isVisible={newPlaylistSelected}
         children={
             <NewPlaylistForm
-                            
+                submit={submitNewPlaylist}
             />
         }
         />
@@ -53,12 +69,12 @@ export default function PlaylistBar(props: Props){
 
         <div className='flex flex-row gap-1 overflow-x-auto'>
             
-            {props.isNewPlaylistAvailable &&
+            {props.isNewPlaylistAvailable && 
                 <NewPlaylistButton
                 onClick={toggleNewPlaylistSelected}
                 />
             }
-
+      
             {mapPlaylistsBoxs}
 
         </div>

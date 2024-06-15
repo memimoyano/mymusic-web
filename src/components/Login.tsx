@@ -13,7 +13,7 @@ export default function Login(){
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    const changePasswordVisibility = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => (
+    const changePasswordVisibility = (_e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => (
         setShowPassword(!showPassword)
     )
 

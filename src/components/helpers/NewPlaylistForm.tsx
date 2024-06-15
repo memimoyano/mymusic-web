@@ -1,21 +1,22 @@
-import { useState } from "react"
+import { FormEventHandler, useState } from "react"
 import { Playlist, PlaylistRequest } from "../../shared/interfaces/Playlist"
 
 interface Props{
-    playlist: PlaylistRequest
     submit: (playlist: PlaylistRequest) => void,
 }
 
 export default function NewPlaylistForm (props: Props) {
-
-    const [name, setName] = useState<string>()
+    const [name, setName] = useState<string>("")
 
     const onNameChange = (e: React.ChangeEvent<HTMLInputElement>) => (
         setName(e.target.value)
     )
 
-    const submit = (e: any) => {
-        
+    const submit: FormEventHandler<HTMLFormElement> = (e) => {
+        if (!name) {
+            return;
+        }
+
         e.preventDefault();
 
         const playlist: PlaylistRequest = {
@@ -33,14 +34,16 @@ export default function NewPlaylistForm (props: Props) {
                     Name
                 </label>
                 <input id="email" type="text" required
-                            className="block px-2.5 pb-2.5 pt-4 w-full bg-jet
-                            text-ivory aparence-none rounded-lg
-                            focus:outline-none focus:ring-0 autofill:bg-jet"
-                            />
+                    onChange={onNameChange}
+                    className="block px-2.5 pb-2.5 pt-4 w-full bg-jet
+                    text-ivory aparence-none rounded-lg
+                    focus:outline-none focus:ring-0 autofill:bg-jet"
+                />
             </div>
 
-            <button className="self-end bg-jet px-3 py-2 rounded-full 
-            font-medium tracking-wide hover:bg-periwinkle hover:text-night">
+            <button type="submit" className="self-end bg-jet px-3 py-2 rounded-full 
+                font-medium tracking-wide hover:bg-periwinkle hover:text-night"
+            >
                 Create
             </button>
 

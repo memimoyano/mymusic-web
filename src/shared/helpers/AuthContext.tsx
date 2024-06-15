@@ -2,6 +2,10 @@ import React, { createContext, useEffect, useState } from "react";
 
 export const TOKEN_STORAGE_KEY = "token";
 
+export function getToken(): string | null {
+    return localStorage.getItem(TOKEN_STORAGE_KEY);
+}
+
 function parseJwt (token: string) {
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
