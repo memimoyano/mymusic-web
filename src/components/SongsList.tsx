@@ -1,7 +1,22 @@
+import { Song } from "../shared/interfaces/Song";
 import SongListItem from "./helpers/SongListItem";
 
+interface Props{
+    songList: Song[] 
+    showAllLink: string
+}
 
-export default function SongsList(){
+export default function SongsList(props: Props){
+
+    const mapSongLi = props.songList && (props.songList).map((s) => (
+        <SongListItem
+            songArtist={s.author}
+            songName={s.name}
+            songGenre={s.genre}
+        />
+    ))
+
+
     return(
         <section className='flex flex-col gap-2 w-full'>
 
@@ -9,23 +24,14 @@ export default function SongsList(){
                     <h1 className='text-xl font-medium'> 
                         Songs
                     </h1>
-                    <a className='text-sm hover:underline cursor-pointer'>
+                    <a className='text-sm hover:underline cursor-pointer' href={props.showAllLink}>
                         Show all
                     </a>
                 </div>
 
 
                 <ul className='flex flex-col'>
-                    
-                    <SongListItem
-                    SongArtist="Megadeth"
-                    SongName="Peace Sells"
-                    />
-
-                    <SongListItem
-                    SongArtist="Dio"
-                    SongName="Holy Diver"
-                    />
+                    {mapSongLi}
                 </ul>
 
             </section>

@@ -1,11 +1,18 @@
+import { MouseEventHandler } from 'react';
 import add from '../../images/add.webp'
 
+interface Props{
+    onClick: MouseEventHandler<HTMLButtonElement> | undefined;
+}
 
-export default function NewPlaylistButton(){
+
+export default function NewPlaylistButton(props: Props){
 
     return(
         <button className='group flex flex-col gap-3 text-ivory
-        hover:bg-jet px-2 py-3 group rounded-sm'>
+        hover:bg-jet px-2 py-3 group rounded-sm w-40'
+            onClick={props.onClick}
+        >
             <div className='rounded-sm
             shadow-md shadow-night 
             bg-eerie-black w-36 p-5'>
