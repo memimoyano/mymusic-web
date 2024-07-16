@@ -31,6 +31,7 @@ export default function PlaylistBar(props: Props){
     const mapPlaylistsBoxs = props.playlistList && (props.playlistList).map((p,i) => (
         <PlaylistBox
             key={p.id}
+            playlist_id={p.id}
             playlist_name={p.name}
             song_count={p.songCount}
         />

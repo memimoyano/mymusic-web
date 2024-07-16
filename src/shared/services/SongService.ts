@@ -33,3 +33,15 @@ export function getSearchSongs(keyword: string) {
         throw error;
     });
 }
+
+
+export function getAllSongsByPlaylistId(playlistId: number) {
+    const headers = {
+        'Content-Type': 'application/json'
+    }
+    return axios.get(`${CONSTANTS.BASE_URL}/songs/${playlistId}`, {headers: headers, withCredentials: true})
+    .then(res => res.data)
+    .catch(error => {
+        throw error;
+    });
+}

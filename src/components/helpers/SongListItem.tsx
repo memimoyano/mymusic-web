@@ -19,7 +19,7 @@ export default function SongListItem(props: Props){
             <section className='flex flex-row justify-between w-full items-center'>
                 <p className='flex flex-col text-base text-wrap w-1/2'>
                     {props.songName}
-                    <span className='text-sm'>
+                    <span className='text-sm text-gray-300'>
                         {props.songArtist}
                     </span>
                 </p>

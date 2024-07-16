@@ -52,6 +52,17 @@ export function getMyLastEightPlaylists() {
     });
 }
 
+export function getPlaylistById(playlistId: number) {
+    const headers = {
+        'Content-Type': 'application/json',
+    }
+    return axios.get(`${CONSTANTS.BASE_URL}/playlists/${playlistId}`, {headers: headers, withCredentials: true})
+    .then(res => res.data)
+    .catch(error => {
+        throw error;
+    });
+}
+
 
 export function createPlaylist(playlist: PlaylistRequest) {
     const token = getToken();

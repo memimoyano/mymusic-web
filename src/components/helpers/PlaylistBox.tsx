@@ -1,6 +1,7 @@
 import mymusic_grey_icon from '../../images/mymusic-grey.webp'
 
 interface Props{
+    playlist_id: number
     playlist_name: String
     song_count: number
 }
@@ -8,7 +9,7 @@ interface Props{
 export default function PlaylistBox(props: Props){
     return(
         <a className='flex flex-col gap-3 text-ivory
-        hover:bg-jet px-2 py-3 group rounded-sm w-40'>
+        hover:bg-jet px-2 py-3 group rounded-sm w-40' href={`/playlist/${props.playlist_id}`} >
             
             <div className='rounded-sm
             shadow-md shadow-night 
