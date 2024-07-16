@@ -57,22 +57,24 @@ export default function PlaylistPage(){
                     <img src={home} className='w-5'/>
                 </a>
 
-                <section className='flex flex-row items-center gap-5 self-start px-3 pb-9'>
+                <section className='flex flex-col md:flex-row w-full
+                items-center gap-5 md:self-start px-3 pb-9'>
                     <div className='rounded-sm
                     shadow-md shadow-night 
-                    bg-eerie-black w-32 p-1'>
+                    bg-eerie-black w-40 p-1'>
                         <img src={mymusic_grey_icon} 
                         className='p-2'
                         />
                     </div>
 
-                    <section className='flex flex-col gap-2'>
-                        <h1 className='text-3xl font-bold'>
+                    <section className='flex flex-col gap-2 w-full 
+                    md:self-center self-start'>
+                        <h1 className='md:text-4xl text-3xl font-bold'>
                             {playlist?.name}
                         </h1>
 
                         <h2 className='text-sm'>
-                            memoyano ● {playlist?.songCount} songs
+                            ● {playlist?.songCount} songs
                         </h2>
                     </section>
 

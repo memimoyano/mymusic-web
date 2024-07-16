@@ -39,7 +39,7 @@ export function getAllSongsByPlaylistId(playlistId: number) {
     const headers = {
         'Content-Type': 'application/json'
     }
-    return axios.get(`${CONSTANTS.BASE_URL}/songs/${playlistId}`, {headers: headers, withCredentials: true})
+    return axios.get(`${CONSTANTS.BASE_URL}/playlists/${playlistId}/songs`, {headers: headers, withCredentials: true})
     .then(res => res.data)
     .catch(error => {
         throw error;
