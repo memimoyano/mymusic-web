@@ -2,18 +2,23 @@ import mymusic_grey_icon from '../images/mymusic-grey.webp'
 import home from '../images/home.webp'
 import sort from '../images/sort.webp'
 import SongListItem from './helpers/SongListItem'
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Song } from '../shared/interfaces/Song';
 import { getAllSongsByPlaylistId } from '../shared/services/SongService';
 import { useParams } from 'react-router-dom';
-import { Playlist } from '../shared/interfaces/Playlist';
-import { getPlaylistById } from '../shared/services/PlaylistService';
+import { Playlist, PlaylistRequest } from '../shared/interfaces/Playlist';
+import { getPlaylistById, updatePlaylist } from '../shared/services/PlaylistService';
+import { AuthContext } from '../shared/helpers/AuthContext';
+import EditPlaylistForm from './helpers/EditPlaylistForm';
+import PopUp from './helpers/PopUp';
 
 export default function PlaylistPage(){
 
     const { playlistId } = useParams();
     const [playlist, setPlaylist] = useState<Playlist>();
     const [allPlaylistSongs, setAllPlaylistSongs] = useState<Song[]>();
+    const authEmail = useContext(AuthContext);
+    const [editPlaylistSelected, setEditPlaylistSelected] = useState(false);
 
     useEffect(()=> {
         fetchPlaylist();
@@ -44,10 +49,32 @@ export default function PlaylistPage(){
         />
     ))
 
+    const toggleEditPlaylistSelected = () => {
+        setEditPlaylistSelected(!editPlaylistSelected);
+    }
+
+    function submitEditPlaylist(playlist: PlaylistRequest) {
+        playlistId &&
+        updatePlaylist(parseInt(playlistId),playlist)
+        toggleEditPlaylistSelected();
+        window.location.reload();
+    }
+
     return(
         <div className="flex flex-col bg-night rounded
         text-ivory items-center w-full h-screen overflow-auto gap-4">
 
+            <PopUp
+            label='Edit Playlist'
+            toggleVisibility={toggleEditPlaylistSelected}
+            isVisible={editPlaylistSelected}
+            children={
+                <EditPlaylistForm
+                    submit={submitEditPlaylist}
+                    playlist={playlist}
+                />
+            }
+            />
     
             <section className='flex flex-col items-center gap-6 py-2 px-1 bg-
             bg-gradient-to-b from-periwinkle to-night w-full'>
@@ -66,18 +93,30 @@ export default function PlaylistPage(){
                         className='p-2'
                         />
                     </div>
-
-                    <section className='flex flex-col gap-2 w-full 
-                    md:self-center self-start'>
+                {authEmail == playlist?.ownerEmail &&
+                    <button className='flex flex-col gap-3 w-full 
+                    md:self-center self-start' onClick={toggleEditPlaylistSelected}>
                         <h1 className='md:text-4xl text-3xl font-bold'>
                             {playlist?.name}
                         </h1>
 
-                        <h2 className='text-sm'>
-                            ● {playlist?.songCount} songs
+                        <h2 className='text-sm text-gray-300'>
+                            {playlist?.ownerEmail} ● {playlist?.songCount} songs
                         </h2>
-                    </section>
+                    </button>
+                }
+                {authEmail != playlist?.ownerEmail &&
+                    <div className='flex flex-col gap-3 w-full 
+                    md:self-center self-start cursor-default'>
+                        <h1 className='md:text-4xl text-3xl font-bold'>
+                            {playlist?.name}
+                        </h1>
 
+                        <h2 className='text-sm text-gray-300'>
+                            {playlist?.ownerEmail} ● {playlist?.songCount} songs
+                        </h2>
+                    </div>
+                }
                 </section>
                     
             </section>
@@ -87,6 +126,7 @@ export default function PlaylistPage(){
                 {mapSongs}
 
             </div>
+            
 
         </div>
     )

@@ -1,7 +1,8 @@
 export interface Playlist{
     id: number,
     name: string,
-    songCount: number   
+    songCount: number,
+    ownerEmail: string
 }
 
 export interface PlaylistRequest{
