@@ -96,7 +96,7 @@ export function deletePlaylist(playlistId: number) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
     }
-    return axios.put(`${CONSTANTS.BASE_URL}/playlists/${playlistId}`, {headers: headers, withCredentials: true})
+    return axios.delete(`${CONSTANTS.BASE_URL}/playlists/${playlistId}`, {headers: headers, withCredentials: true})
     .then(res => res.data)
     .catch(error => {
         throw error;

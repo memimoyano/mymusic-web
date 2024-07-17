@@ -23,6 +23,7 @@ export default function Login(){
             await login(email, password);
             setError("");
             navigate("/");
+            window.location.reload();
         } catch(err) {
             setError("There was an error logging in. Please check your credentials.");
         }
