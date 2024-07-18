@@ -20,7 +20,7 @@ export default function PlaylistBox(props: Props){
             </div>
             
             <div className='flex flex-col gap-0.5 '>
-                <span className='text-wrap'>{props.playlist_name}</span>
+                <span className='truncate'>{props.playlist_name}</span>
                 <span className='text-sm text-dim-gray'>{props.song_count} Songs</span>
             </div>
 

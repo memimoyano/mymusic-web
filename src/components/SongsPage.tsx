@@ -29,9 +29,7 @@ export default function SongsPage(){
 
     const mapSongs = allSongs?.map((s) => (
         <SongListItem
-            songArtist={s.author}
-            songName={s.name}
-            songGenre={s.genre}
+            song={s}
         />
     ))
 

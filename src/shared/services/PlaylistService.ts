@@ -2,6 +2,7 @@ import axios from "axios"
 import CONSTANTS from "../helpers/Constants";
 import { PlaylistRequest } from "../interfaces/Playlist";
 import { getToken } from "../helpers/AuthContext";
+import { SongRequest } from "../interfaces/Song";
 
 export function getAllPlaylists() {
     const headers = {
@@ -103,3 +104,15 @@ export function deletePlaylist(playlistId: number) {
     });
 }
 
+export function addSongToPlaylist(playlistId: number, songRequest: SongRequest) {
+    const token = getToken();
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+    }
+    return axios.post(`${CONSTANTS.BASE_URL}/playlists/${playlistId}/song`, songRequest, {headers: headers, withCredentials: true})
+    .then(res => res.data)
+    .catch(error => {
+        throw error;
+    });
+}

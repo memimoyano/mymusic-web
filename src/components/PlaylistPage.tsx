@@ -43,9 +43,7 @@ export default function PlaylistPage(){
 
     const mapSongs = allPlaylistSongs?.map((s) => (
         <SongListItem
-            songArtist={s.author}
-            songName={s.name}
-            songGenre={s.genre}
+            song={s}
         />
     ))
 
@@ -96,7 +94,7 @@ export default function PlaylistPage(){
                 {authEmail == playlist?.ownerEmail &&
                     <button className='flex flex-col gap-3 w-full 
                     md:self-center self-start' onClick={toggleEditPlaylistSelected}>
-                        <h1 className='md:text-4xl text-3xl font-bold'>
+                        <h1 className='md:text-4xl text-3xl text-wrap truncate font-bold text-start'>
                             {playlist?.name}
                         </h1>
 

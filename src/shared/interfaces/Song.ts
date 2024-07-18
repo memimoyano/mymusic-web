@@ -4,3 +4,7 @@ export interface Song{
     author: string,
     genre: string
 }
+
+export interface SongRequest {
+    id: number
+}

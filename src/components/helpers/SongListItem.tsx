@@ -1,15 +1,26 @@
 import song_icon from '../../images/song.webp'
+import dots_vertical from '../../images/dots-vertical.webp'
+import { useState } from 'react'
+import PopUp from './PopUp'
+import SongForm from './SongForm'
+import { Song } from '../../shared/interfaces/Song'
 
 interface Props{
-    songName: string,
-    songArtist: string
-    songGenre: string
+    song: Song
 }
 
 export default function SongListItem(props: Props){
+
+    const [dropDownSelected, setDropDownSelected] = useState(false);
+
+    const toggleDropDown = () => {
+        setDropDownSelected(!dropDownSelected);
+    }
+
     return(
+    <>
         <li className='flex flex-row gap-3 text-ivory items-center
-        hover:bg-jet px-2 py-3 group rounded-sm w-full' >
+        hover:bg-jet px-2 py-3 group rounded-sm w-full group' >
         
             <div className='rounded-sm
             shadow-md shadow-night bg-eerie-black h-15 w-14 p-3.5'>
@@ -17,21 +28,36 @@ export default function SongListItem(props: Props){
             </div>
 
             <section className='flex flex-row justify-between w-full items-center'>
-                <p className='flex flex-col text-base text-wrap w-1/2'>
-                    {props.songName}
-                    <span className='text-sm text-gray-300'>
-                        {props.songArtist}
+                <p className='flex flex-col md:text-base text-sm text-wrap md:w-1/2 w-4/6'>
+                    {props.song.name}
+                    <span className='md:text-sm text-xs text-gray-400'>
+                        {props.song.author}
                     </span>
                 </p>
 
-                <p className='text-md items-center text-dim-gray italic'>
-                    {props.songGenre}
+                <p className='md:text-md text-sm items-center text-dim-gray italic'>
+                    {props.song.genre}
                 </p>
             </section>
 
+            <button onClick={toggleDropDown} 
+            className='w-5 opacity-50 group-hover:opacity-100'
+            >
+                <img src={dots_vertical}/>
+            </button>
+        
+        </li>
 
+        <PopUp
+        label={props.song.name}
+        toggleVisibility={toggleDropDown}
+        isVisible={dropDownSelected}
+        children={
+            <SongForm
+                song={props.song}
+            />}
+        />  
 
-
-    </li>
+    </>
     )
 }

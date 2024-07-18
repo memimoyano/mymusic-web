@@ -45,7 +45,7 @@ export default function MainPage(){
 
 
     return(
-        <div className="flex flex-col bg-night rounded px-4 py-10
+        <div className="flex flex-col bg-night rounded md:px-4 px-2 py-10
         text-ivory items-center w-full h-screen overflow-auto gap-8">
 
             {authEmail &&
