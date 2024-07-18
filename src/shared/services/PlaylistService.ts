@@ -116,3 +116,16 @@ export function addSongToPlaylist(playlistId: number, songRequest: SongRequest) 
         throw error;
     });
 }
+
+export function deleteSongFromPlaylist(playlistId: number,songId: number) {
+    const token = getToken();
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+    }
+    return axios.delete(`${CONSTANTS.BASE_URL}/playlists/${playlistId}/song/${songId}`, {headers: headers, withCredentials: true})
+    .then(res => res.data)
+    .catch(error => {
+        throw error;
+    });
+}

@@ -3,6 +3,7 @@ import { PlaylistRequest } from '../../shared/interfaces/Playlist'
 import add from '../../images/add.webp'
 import { Song, SongRequest } from '../../shared/interfaces/Song'
 import { addSongToPlaylist } from '../../shared/services/PlaylistService'
+import { useNavigate } from 'react-router-dom'
 
 interface Props{
     playlist: PlaylistRequest,
@@ -11,6 +12,7 @@ interface Props{
 
 export default function PlaylistListItem(props: Props){
 
+    const navigate = useNavigate();
 
     function addSongToPlaylistById() {
 
@@ -19,6 +21,7 @@ export default function PlaylistListItem(props: Props){
         }
 
         addSongToPlaylist(props.playlist.id,songRequest)
+        navigate(`/playlist/${props.playlist.id}`)
         window.location.reload();
     }
 
