@@ -45,3 +45,14 @@ export function getAllSongsByPlaylistId(playlistId: number) {
         throw error;
     });
 }
+
+export function getSearchSongsByPlaylistId(playlistId: number,keyword: string) {
+    const headers = {
+        'Content-Type': 'application/json'
+    }
+    return axios.get(`${CONSTANTS.BASE_URL}/songs/search/playlist/${playlistId}`, {headers: headers, withCredentials: true, params: { keyword }})
+    .then(res => res.data)
+    .catch(error => {
+        throw error;
+    });
+}

@@ -4,13 +4,14 @@ import sort from '../images/sort.webp'
 import SongListItem from './helpers/SongListItem'
 import { useContext, useEffect, useState } from 'react';
 import { Song } from '../shared/interfaces/Song';
-import { getAllSongsByPlaylistId } from '../shared/services/SongService';
+import { getAllSongsByPlaylistId, getSearchSongsByPlaylistId } from '../shared/services/SongService';
 import { useParams } from 'react-router-dom';
 import { Playlist, PlaylistRequest } from '../shared/interfaces/Playlist';
 import { getPlaylistById, updatePlaylist } from '../shared/services/PlaylistService';
 import { AuthContext } from '../shared/helpers/AuthContext';
 import EditPlaylistForm from './helpers/EditPlaylistForm';
 import PopUp from './helpers/PopUp';
+import Searchbar from './helpers/Searchbar';
 
 export default function PlaylistPage(){
 
@@ -56,6 +57,14 @@ export default function PlaylistPage(){
         updatePlaylist(parseInt(playlistId),playlist)
         toggleEditPlaylistSelected();
         window.location.reload();
+    }
+
+    const submitSearchSong = (s: string) => {
+        playlistId &&
+        getSearchSongsByPlaylistId(parseInt(playlistId),s)
+        .then((responseSongs: Song[]) => {
+            setAllPlaylistSongs(responseSongs);
+        })
     }
 
     return(
@@ -120,6 +129,12 @@ export default function PlaylistPage(){
             </section>
 
             <div className='flex flex-col w-full md:justify-start justify-center px-1 '>
+
+                <div className='flex flex-row gap-2 px-6 w-full justify-end'>
+                    <Searchbar 
+                    submit={submitSearchSong}
+                    />
+                </div>
 
                 {mapSongs}
 
