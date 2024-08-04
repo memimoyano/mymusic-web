@@ -5,6 +5,8 @@ import PlaylistsPage from './components/PlaylistsPage'
 import SongsPage from './components/SongsPage'
 import MyPlaylistsPage from './components/MyPlaylistsPage'
 import { AuthProvider } from './shared/helpers/AuthContext'
+import SignUp from './components/SignUp'
+import PlaylistPage from './components/PlaylistPage'
 
 function App() {
 
@@ -19,9 +21,11 @@ function App() {
 
             <Route path='/' element={<MainPage/>} />
             <Route path='/login' element={<Login/>} />
+            <Route path='/signup' element={<SignUp/>} />
             <Route path='/allplaylists' element={<PlaylistsPage/>} />
             <Route path='/allmyplaylists' element={<MyPlaylistsPage/>} />
             <Route path='/allsongs' element={<SongsPage/>} />
+            <Route path='playlist/:playlistId' element={<PlaylistPage/>} />
             
           </Routes>
           

@@ -10,9 +10,7 @@ export default function SongsList(props: Props){
 
     const mapSongLi = props.songList && (props.songList).map((s) => (
         <SongListItem
-            songArtist={s.author}
-            songName={s.name}
-            songGenre={s.genre}
+            song={s}
         />
     ))
 

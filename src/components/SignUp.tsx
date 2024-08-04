@@ -2,11 +2,13 @@ import { FormEventHandler, useState } from "react"
 import close_eye from '../images/close-eye.webp';
 import open_eye from '../images/open-eye.webp';
 import mymusic_icon from '../images/mymusic-periwinkle-icon.webp'
-import { login } from "../shared/services/AuthService";
 import { useNavigate } from "react-router-dom";
+import { createUser } from "../shared/services/UserService";
+import { User } from "../shared/interfaces/User";
+import { login } from "../shared/services/AuthService";
 
 
-export default function Login(){
+export default function SignUp(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
@@ -19,26 +21,32 @@ export default function Login(){
 
     const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
-        try {
-            await login(email, password);
-            setError("");
-            navigate("/");
-            window.location.reload();
-        } catch(err) {
-            setError("There was an error logging in. Please check your credentials.");
+        
+        const newUser: User = {
+            email: email,
+            password: password
         }
+
+        createUser(newUser)
+        .then(resUser => {
+            login(email,password);
+            navigate("/");
+        })    
+        .catch(error => {
+            setError(error.response.data || 'Error')
+        });
     }
 
     return(
         <div className="flex flex-col bg-night rounded px-6 py-10 justify-between
         text-ivory items-center w-5/6 md:w-3/6 gap-5">
 
-            <section className="flex flex-col items-center justify-between gap-1 
+        <section className="flex flex-col items-center justify-between gap-1 
             border-black-olive border-b pb-5 w-full">
                 <img src={mymusic_icon} className="w-1/4 md:w-1/6 md:p-3"/>
                 <h1 className="font-medium flex flex-col md:gap-1
                 text-center text-3xl md:text-4xl text-light-periwinkle tracking-wide">
-                    Log in 
+                    Sign Up 
                     <span>
                         My Music
                     </span>
@@ -55,7 +63,7 @@ export default function Login(){
                     group-focus-within:border-periwinkle
                     items-center rounded-lg border border-dim-gray
                     ">
-                        <input id="email" type="text" required
+                        <input id="email" type="email" required
                         className="block px-2.5 pb-2.5 pt-4 w-full bg-night
                         text-ivory aparence-none rounded-lg
                         focus:outline-none focus:ring-0 autofill:bg-night"
@@ -107,12 +115,12 @@ export default function Login(){
                     </div>
                 }
    
-                <input type="submit" value={"Log in"} className="btn-primary"/>
+                <input type="submit" value={"Sign Up"} className="btn-primary"/>
             </form>
 
-            <a href="/signup" 
+            <a href="/login" 
             className="hover:text-periwinkle hover:cursor-pointer text-lg hover:underline underline-offset-2">
-                Sign up
+                Log in
             </a>
         </div>
     )

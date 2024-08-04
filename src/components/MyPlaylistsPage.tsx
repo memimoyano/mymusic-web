@@ -21,7 +21,8 @@ export default function MyPlaylistsPage(){
     const mapPlaylistsBoxs = allMyPlaylists?.map((p,i) => (
         <PlaylistBox
             playlist_name={p.name}
-            song_count={p.songCount}
+            song_count={p.songCount} 
+            playlist_id={p.id}            
         />
     ))
 
