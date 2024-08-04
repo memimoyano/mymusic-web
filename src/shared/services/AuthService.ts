@@ -7,7 +7,7 @@ export async function login(email: string, password: string) {
         'Content-Type': 'application/json'
     }
     const data = { email, password }
-    const res = await axios.post(`${CONSTANTS.BASE_URL}/login`, data, {headers: headers, withCredentials: true})
+    const res = await axios.post(`${CONSTANTS.BASE_URL}/user-service/login`, data, {headers: headers, withCredentials: true})
     if (res.status !== 200) {
         throw new Error("Auth error");
     }
@@ -20,7 +20,7 @@ export function logout() {
     const headers = {
         'Content-Type': 'application/json'
     }
-    return axios.get(`${CONSTANTS.BASE_URL}/logout`, {headers: headers, withCredentials: true})
+    return axios.get(`${CONSTANTS.BASE_URL}/user-service/logout`, {headers: headers, withCredentials: true})
     .then(res => res.data)
     .catch(error => {
         throw error;

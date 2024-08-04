@@ -6,7 +6,7 @@ export function createUser(newUser: User) {
     const headers = {
         'Content-Type': 'application/json',
     }
-    return axios.post(`${CONSTANTS.BASE_URL}/users`, newUser, {headers: headers, withCredentials: true})
+    return axios.post(`${CONSTANTS.BASE_URL}/user-service/users`, newUser, {headers: headers, withCredentials: true})
     .then(res => res.data)
     .catch(error => {
         throw error;
