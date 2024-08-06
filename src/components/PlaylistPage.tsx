@@ -18,7 +18,7 @@ export default function PlaylistPage(){
     const { playlistId } = useParams();
     const [playlist, setPlaylist] = useState<Playlist>();
     const [allPlaylistSongs, setAllPlaylistSongs] = useState<Song[]>();
-    const authEmail = useContext(AuthContext);
+    const authId = useContext(AuthContext);
     const [editPlaylistSelected, setEditPlaylistSelected] = useState(false);
 
     useEffect(()=> {
@@ -100,7 +100,7 @@ export default function PlaylistPage(){
                         className='p-2'
                         />
                     </div>
-                {authEmail == playlist?.ownerEmail &&
+                {authId == playlist?.ownerId &&
                     <button className='flex flex-col gap-3 w-full 
                     md:self-center self-start' onClick={toggleEditPlaylistSelected}>
                         <h1 className='md:text-4xl text-3xl text-wrap truncate font-bold text-start'>
@@ -112,7 +112,7 @@ export default function PlaylistPage(){
                         </h2>
                     </button>
                 }
-                {authEmail != playlist?.ownerEmail &&
+                {authId != playlist?.ownerId &&
                     <div className='flex flex-col gap-3 w-full 
                     md:self-center self-start cursor-default'>
                         <h1 className='md:text-4xl text-3xl font-bold'>

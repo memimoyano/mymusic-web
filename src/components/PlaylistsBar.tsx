@@ -19,10 +19,10 @@ export default function PlaylistBar(props: Props){
 
     const navigate = useNavigate();
     const [newPlaylistSelected, setNewPlaylistSelected] = useState(false);
-    const authEmail = useContext(AuthContext);
+    const authId = useContext(AuthContext);
 
     const toggleNewPlaylistSelected = () => {
-        if (!authEmail) {
+        if (!authId) {
             navigate("/login")
         }
         setNewPlaylistSelected(!newPlaylistSelected);

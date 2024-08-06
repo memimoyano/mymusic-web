@@ -18,7 +18,7 @@ export default function SongForm(props: Props) {
     const [addSongToPlaylist, setAddSongToPlaylist] = useState(false);
     const [allMyPlaylists, setAllMyPlaylists] = useState<Playlist[]>();
     const [thisPlaylist, setThisPlaylist] = useState<Playlist>();
-    const authEmail = useContext(AuthContext);
+    const authId = useContext(AuthContext);
     const { playlistId } = useParams();
     
 
@@ -81,7 +81,7 @@ export default function SongForm(props: Props) {
                 </div>
             }
 
-            {(thisPlaylist && thisPlaylist.ownerEmail == authEmail) &&
+            {(thisPlaylist && thisPlaylist.ownerId == authId) &&
                 <button onClick={DeleteSongFromPlaylist}
                 className="flex flex-row gap-3 bg-eerie-black text-ivory items-center
                 hover:bg-jet px-2 py-3 group rounded-sm w-full">

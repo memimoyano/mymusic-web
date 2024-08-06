@@ -1,9 +1,10 @@
 import song_icon from '../../images/song.webp'
 import dots_vertical from '../../images/dots-vertical.webp'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import PopUp from './PopUp'
 import SongForm from './SongForm'
 import { Song } from '../../shared/interfaces/Song'
+import { AuthContext } from '../../shared/helpers/AuthContext'
 
 interface Props{
     song: Song
@@ -12,6 +13,7 @@ interface Props{
 export default function SongListItem(props: Props){
 
     const [dropDownSelected, setDropDownSelected] = useState(false);
+    const authId = useContext(AuthContext);
 
     const toggleDropDown = () => {
         setDropDownSelected(!dropDownSelected);
@@ -40,12 +42,22 @@ export default function SongListItem(props: Props){
                 </p>
             </section>
 
-            <button onClick={toggleDropDown} 
-            className='w-5 opacity-50 group-hover:opacity-100'
-            >
-                <img src={dots_vertical}/>
-            </button>
-        
+            {authId &&
+                <button onClick={toggleDropDown} 
+                className='w-5 opacity-50 group-hover:opacity-100'
+                >
+                    <img src={dots_vertical}/>
+                </button>
+            }
+
+            {!authId &&
+                <a href='/login'
+                className='w-5 opacity-50 group-hover:opacity-100'
+                >
+                    <img src={dots_vertical}/>
+                </a>
+            }
+
         </li>
 
         <PopUp

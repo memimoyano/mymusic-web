@@ -21,7 +21,7 @@ function parseJwt (token: string) {
     return JSON.parse(jsonPayload);
 }
 
-function getAuthUserEmail(): string | null {
+function getAuthUserId(): string | null {
     const token = localStorage.getItem(TOKEN_STORAGE_KEY);
     if (!token) {
         return null;
@@ -40,12 +40,12 @@ function getAuthUserEmail(): string | null {
 export const AuthContext = createContext("");
 
 export const AuthProvider: React.FC<React.PropsWithChildren> = (props) => {
-    const [authEmail, setAuthEmail] = useState<string>("");
+    const [authId, setAuthId] = useState<string>("");
 
     useEffect(() => {
-        const email = getAuthUserEmail();
-        setAuthEmail(email || "");
+        const userId = getAuthUserId();
+        setAuthId(userId || "");
     }, []);
 
-  return <AuthContext.Provider value={authEmail} {...props} />;
+  return <AuthContext.Provider value={authId} {...props} />;
 }

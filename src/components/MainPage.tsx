@@ -14,7 +14,7 @@ export default function MainPage(){
     const [lastEightPlaylists, setLastEightPlaylists] = useState<Playlist[]>();
     const [myLastEightPlaylists, setMyLastEightPlaylists] = useState<Playlist[]>();
     const [lastFiveSongs, setLastFiveSongs] = useState<Song[]>();
-    const authEmail = useContext(AuthContext);
+    const authId = useContext(AuthContext);
 
     useEffect(()=> {
         fetchLastEightPlaylists();
@@ -48,7 +48,7 @@ export default function MainPage(){
         <div className="flex flex-col bg-night rounded md:px-4 px-2 py-10
         text-ivory items-center w-full h-screen overflow-auto gap-8">
 
-            {authEmail &&
+            {authId &&
             <div className='w-full flex flex-row justify-end'>
                 <button 
                 onClick={() => {
@@ -65,7 +65,7 @@ export default function MainPage(){
             <PlaylistBar
                 sectionName='My Playlists'
                 isNewPlaylistAvailable 
-                showAllLink={authEmail ? '/allmyplaylists' : "/login"}
+                showAllLink={authId ? '/allmyplaylists' : "/login"}
                 playlistList={myLastEightPlaylists || []}
             />
 
