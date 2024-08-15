@@ -62,6 +62,20 @@ export default function MainPage(){
             </div>
             }
 
+            {!authId &&
+            <div className='w-full flex flex-row gap-2 justify-end'>
+                <a href='/signup'
+                className='py-2 rounded-full px-4 font-semibold hover:text-periwinkle'>
+                    Sign Up
+                </a>
+                <a href='/login'
+                className='bg-ivory hover:bg-periwinkle
+                text-night py-2 rounded-full px-4 font-semibold'>
+                    Log in
+                </a>
+            </div>
+            }
+
             <PlaylistBar
                 sectionName='My Playlists'
                 isNewPlaylistAvailable 
